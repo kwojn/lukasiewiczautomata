@@ -101,10 +101,10 @@ function parser() {
 		if(typeof retStr ==="undefined" ){
 			retStr="";
 		}
-		retStr+= " "+node.state;
+		retStr= " "+node.state+retStr;
 		
 		for(var x in node.children){
-			retStr+= this.getStringRepresentation(node.children[x]);
+			retStr=this.getStringRepresentation(node.children[x])+retStr;
 		}
 		return retStr;
 		

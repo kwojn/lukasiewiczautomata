@@ -12,13 +12,13 @@ function automata() {
 			this.walkTree(node.children[x],feedObj);
 		}
 		this.updateStatus(node,feedObj);
-		if (node.isRoot===true){
-			feedObj.updateMatrix();
-		}
 		customEventHandler.trigger("onNodeUpdated",node);
 	}
 
 	this.updateStatus = function(node, feedObj) {
+		if (node.isRoot && this.isTerminalState(node.state)){
+			feedObj.updateMatrix();
+		}
 		
 		// for first run we have no previous state so we assume that it was thesame as current
 		if (node.previousState === null) {

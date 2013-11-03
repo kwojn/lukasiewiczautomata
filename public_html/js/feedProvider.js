@@ -2,6 +2,7 @@ function feedProvider(variableArray){
 	var self = this;
 	this.iterator = 0;
 	this.currentMatrix = "";
+	this.prevMatrix="";
 	this.variableArray = variableArray;
 	this.maxValue = 0;
 	
@@ -9,7 +10,7 @@ function feedProvider(variableArray){
 	this.__init = function(){
 		this.maxValue = Math.pow(3,this.variableArray.length);
 		this.getIterationMatrix(0);
-		console.log(this);
+		
 	}
 	
 	this.getValue = function(variable){
@@ -19,10 +20,12 @@ function feedProvider(variableArray){
 	
 	this.updateMatrix = function(){
 		
-		this.iterator++;
-		if (this.iterator>this.maxValue){
+		this.prevMatrix=this.currentMatrix;
+		
+		if (this.iterator>=this.maxValue){
 			return customEventHandler.trigger("onIterationLimitReached",this);
 		}
+		this.iterator++;
 		this.getIterationMatrix(this.iterator);
 		customEventHandler.trigger("onFeedUpdated",this);
 	}

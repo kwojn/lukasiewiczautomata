@@ -18,11 +18,10 @@ function controller(){
 	this.loadInputData = function(id,e){
 			
 		var inputString = document.getElementById(id).value;
-		
-		
 		self.parser.loadInput(inputString);
 		self.feedProvider = new feedProvider(self.parser.variableArray);
 		this.rootNode = self.parser.buildTree();
+		//$("#output").append("<p>"+this.parser.getStringRepresentation(this.rootNode)+"  inputFeed: initialState</p>");
 		
 		self.processTree();
 		
@@ -30,20 +29,15 @@ function controller(){
 	}
 	
 	this.processTree = function(){
-		
-		customEventHandler.addListener("onIterationLimitReached",function(){
-			
+		customEventHandler.addListener("onIterationLimitReached",function(obj){
 			self.stopCondition=true;
 		});
-		
-		
-		
 		while(!this.stopCondition){
 			self.automata.walkTree(self.rootNode,self.feedProvider);
-			customEventHandler.trigger("onIterationEnd",this);
-			//this.parser.drawArray(this.rootNode);
 			
-		}		
+			customEventHandler.trigger("onIterationEnd",this);
+			
+		};
 		
 	}
 	self.__init();
@@ -64,18 +58,17 @@ function controller(){
 	
 	global.customEventHandler.addListener("onIterationEnd", function(obj){
 		if (obj.rootNode.state==="F" && document.forms[0].breakOnFalse.checked===true){
-			obj.stopCondition=true;
+			 return obj.stopCondition=true;
 		}
-		$("#output").append("<p>"+obj.parser.getStringRepresentation(obj.rootNode)+"  inputFeed: "+obj.feedProvider.currentMatrix+"</p>");
+		var feed=obj.feedProvider.currentMatrix;
+		if (feed.length===0){
+			feed=" initial state";
+		}
+		$("#output").append("<p>"+obj.parser.getStringRepresentation(obj.rootNode)+"  inputFeed: "+feed+"</p>");
 		
 		
 		
 	});
-	
-	global.customEventHandler.addListener("onFeedUpdated",function(obj){
-		console.log("Feed:"+ obj.currentMatrix);
-	});
-	
 	
 	
 	

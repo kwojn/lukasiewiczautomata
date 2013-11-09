@@ -5,11 +5,13 @@ function feedProvider(variableArray){
 	this.prevMatrix="";
 	this.variableArray = variableArray;
 	this.maxValue = 0;
+	this.stop = false;
 	
 	
 	this.__init = function(){
 		this.maxValue = Math.pow(3,this.variableArray.length);
 		this.getIterationMatrix(0);
+		this.stop = false;
 		
 	}
 	

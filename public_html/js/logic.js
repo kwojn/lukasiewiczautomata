@@ -3,6 +3,33 @@
 
 	global.logic = {
 		stateTransition: {
+			
+			
+			"E": {
+				"FF": "T",
+				"FU": "U",
+				"FT": "F",
+				"UF": "U",
+				"UU": "U",
+				"UT": "U",
+				"TF": "F",
+				"TU": "U",
+				"TT": "T",
+			},
+			
+			"EL": {
+				"FF": "T",
+				"FU": "U",
+				"FT": "F",
+				"UF": "U",
+				"UU": "T",
+				"UT": "U",
+				"TF": "F",
+				"TU": "U",
+				"TT": "T",
+			},
+			
+			
 			//implication
 			"I": {
 				"FF": "T",
@@ -14,14 +41,21 @@
 				"TF": "F",
 				"TU": "U",
 				"TT": "T",
-				
-				
-
-				
-				
-				
-				
 			},
+			
+			"IL": {
+				"FF": "T",
+				"FU": "T",
+				"FT": "T",
+				"UF": "U",
+				"UU": "T",
+				"UT": "T",
+				"TF": "F",
+				"TU": "U",
+				"TT": "T",
+			},
+			
+			
 			//negation
 			"!": {
 				"NF": "T",
@@ -30,12 +64,6 @@
 				"TN": "F",
 				"UN": "U",
 				"FN": "T",
-				
-				
-
-				
-				
-				
 			},
 			//alternative
 			"A": {
@@ -48,9 +76,20 @@
 				"TF": "T",
 				"TU": "T",
 				"TT": "T",
-				
-
 			},
+			
+			"AL": {
+				"FF": "F",
+				"FU": "U",
+				"FT": "T",
+				"UF": "U",
+				"UU": "T",
+				"UT": "T",
+				"TF": "T",
+				"TU": "T",
+				"TT": "T",
+			},
+			
 			//conjunction
 			"C": {
 				"FF": "F",
@@ -62,10 +101,17 @@
 				"TF": "F",
 				"TU": "U",
 				"TT": "T",
-				
-				
-
-				
+			},
+			"CL": {
+				"FF": "F",
+				"FU": "F",
+				"FT": "F",
+				"UF": "F",
+				"UU": "F",
+				"UT": "U",
+				"TF": "F",
+				"TU": "U",
+				"TT": "T",
 			},
 			
 		},
@@ -73,20 +119,6 @@
 			nonTerminal: ["I", "IL", "A", "AL", "!", "E", "C"],
 			logicState: ["T", "U", "F","N"]
 		}
-		
-		
-
-
-
-
-
-
 	}
-
-
-
-
-
-
 })(this)
 

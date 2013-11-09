@@ -5,8 +5,11 @@ function controller() {
 	var self = this;
 	this.iterator = 0;
 	this.stopOnFalse = false;
+	this.stopOnValue = document.forms[0].stopOn.value;
 
-
+	this.updateOnStop  = function(htmlObject){
+		this.onStopValue = htmlObject.value;
+	}
 
 	this.__init = function() {
 		
@@ -14,7 +17,7 @@ function controller() {
 		self.parser = new parser();
 		self.feedProvider = {};
 		self.automata = new automata();
-		
+		$("#output").html("");
 		
 	}
 
@@ -54,14 +57,16 @@ function controller() {
 		global.customEventHandler = new eventHandler();
 
 		global.customEventHandler.addListener("onIterationLimitReached", function(obj) {
-			console.log(obj.stop);
+			
 			obj.stop = true;
 			return;
 		});
 
 		global.customEventHandler.addListener("onIterationEnd", function(obj) {
-			if (obj.rootNode.state === "F" && document.forms[0].breakOnFalse.checked === true) {
-				return obj.stopCondition = true;
+				
+			if (obj.rootNode.state ==obj.onStopValue && document.forms[0].breakOnFalse.checked === true) {
+				
+				return obj.feedProvider.stop = true;
 			}
 			var feed = obj.feedProvider.currentMatrix;
 			if (feed.length === 0) {

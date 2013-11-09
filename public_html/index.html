@@ -78,7 +78,13 @@
 			 <form onsubmit="controller.loadInputData('inputField',$(this)); return false;" class="navbar-form pull-right">
                             <input style="width:700px;" id="inputField" type="text" placeholder="input" value="1 2 C N ! 3 A 1 1 C A">
 							<div class="checkbox">
-							<label><input type="checkbox" value="1" name="breakOnFalse"> Przerwij jeśli nie jest tautologią</label>
+							<label><input type="checkbox" value="1" name="breakOnFalse"> Przerwij na:
+								<select name="stopOn" onchange="controller.updateOnStop(this);">
+								<option value="F">F</option>
+								<option value="U">U </option>
+								<option value="T">T</option>
+							</select>
+								 </label>
 							</div>
                             <button type="submit" class="btn">Start</button>
 							
